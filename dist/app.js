@@ -14,7 +14,7 @@ app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 // application router
 app.use('/api', user_route_1.UserRoutes);
-app.get('/api', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Mongoose Express CRUD Mastery');
 });
 exports.default = app;

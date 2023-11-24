@@ -118,5 +118,5 @@ exports.UserControllers = {
     getUser,
     getSingleUser,
     updateUser,
-    deleteUser
+    deleteUser,
 };

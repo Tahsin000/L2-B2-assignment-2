@@ -9,6 +9,13 @@ const addressSchema = z.object({
   city: z.string().min(1, 'City is required'),
   country: z.string().min(1, 'Country is required'),
 })
+
+export const ordersValidationSchema = z.object({
+  productName: z.string(),
+  price: z.number(),
+  quantity: z.number(),
+})
+
 export const userValidationSchema = z.object({
   userId: z.number(),
   username: z.string().min(1, 'Username is required'),
@@ -20,6 +27,7 @@ export const userValidationSchema = z.object({
   hobbies: z.array(z.string()),
   address: addressSchema,
   isDeleted: z.boolean().default(false),
+  orders: z.array(ordersValidationSchema).optional().default([]),
 })
 export const userUpdateValidationSchema = z.object({
   userId: z.number().optional(),

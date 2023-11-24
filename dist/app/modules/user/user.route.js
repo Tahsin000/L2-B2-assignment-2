@@ -7,7 +7,7 @@ exports.UserRoutes = void 0;
 const express_1 = __importDefault(require("express"));
 const user_controller_1 = require("./user.controller");
 const router = express_1.default.Router();
-// will call controller function 
+// will call controller function
 router.post('/users', user_controller_1.UserControllers.createUser);
 router.get('/users/:userId', user_controller_1.UserControllers.getSingleUser);
 router.get('/users', user_controller_1.UserControllers.getUser);

@@ -1,5 +1,5 @@
 import { User } from '../users.model'
-import { TUpdateUser, TUser } from './user.interface'
+import { TOrders, TUpdateUser, TUser } from './user.interface'
 
 const createUserIntoDB = async (user: TUser) => {
   if (await User.isUserExists(user.userId)) {
@@ -79,10 +79,19 @@ const deleteUserIntoDB = async (userId: number) => {
   return result
 }
 
+const updateOrderIntoDB = async (userId: number, order: TOrders) => {
+  const result = await User.updateOne({ userId }, { $push: { orders: order } })
+
+  console.log(order)
+  // console.log({order})
+  return result
+}
+
 export const UserServices = {
   createUserIntoDB,
   getUserIntoDB,
   getSingleUserIntoDB,
   updateUserIntoDB,
   deleteUserIntoDB,
+  updateOrderIntoDB,
 }

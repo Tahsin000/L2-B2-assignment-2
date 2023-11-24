@@ -33,6 +33,13 @@ export const userSchema = new Schema<TUser>({
     type: Boolean,
     default: false,
   },
+  orders: [
+    {
+      productName: { type: String },
+      price: { type: Number },
+      quantity: { type: Number },
+    }
+  ]
 })
 userSchema.pre('save', async function (next) {
   // console.log(this, 'pre, hook: we will save the data ')
@@ -64,8 +71,8 @@ userSchema.pre('aggregate', function (next) {
   next()
 })
 
-userSchema.statics.isUserExists = async function (userId: number){
-  const existingUser = await User.findOne({userId});
+userSchema.statics.isUserExists = async function (userId: number) {
+  const existingUser = await User.findOne({ userId })
   return existingUser
 }
 
