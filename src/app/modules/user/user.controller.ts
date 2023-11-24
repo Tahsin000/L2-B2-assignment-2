@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Request, Response } from 'express'
 import { UserServices } from './user.service'
-import { userValidationSchema } from './user.validation.zod'
+import { userUpdateValidationSchema, userValidationSchema } from './user.validation.zod'
 
 const createUser = async (req: Request, res: Response) => {
   // will call service function
@@ -69,8 +69,9 @@ const updateUser = async (req: Request, res: Response) => {
         message: 'You cannot change the userId or username.',
       });
     }
+    console.log(user)
 
-    const zodParsedData = userValidationSchema.parse(user)
+    const zodParsedData = userUpdateValidationSchema.parse(user)
     const result = await UserServices.updateUserIntoDB(userId, zodParsedData);
     res.status(200).json({
       success: true,

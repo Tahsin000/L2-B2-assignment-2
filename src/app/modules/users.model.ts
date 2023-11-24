@@ -16,29 +16,52 @@ export const addressSchema = new Schema<TAddress>({
 })
 
 export const userSchema = new Schema<TUser>({
-  userId: { type: Number, required: [true, 'Student ID is required.'] , unique: true,},
-  username: { type: String, required: true , unique: true,},
+  userId: {
+    type: Number,
+    required: [true, 'Student ID is required.'],
+    unique: true,
+  },
+  username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   fullName: userNameSchema,
   age: { type: Number, required: true },
-  email: { type: String, required: true, unique: true, },
+  email: { type: String, required: true, unique: true },
   isActive: { type: Boolean, default: true },
   hobbies: [{ type: String }],
   address: addressSchema,
   isDeleted: {
     type: Boolean,
     default: false,
-  }
+  },
 })
 userSchema.pre('save', async function (next) {
-    // console.log(this, 'pre, hook: we will save the data ')
-    // hashing password and save info DB
-    const temp = this
-    temp.password = await bcrypt.hash(
-        temp.password,
-      Number(config.bcrypt_salt_rounds),
-    )
-    next()
-  })
+  // console.log(this, 'pre, hook: we will save the data ')
+  // hashing password and save info DB
+  const temp = this
+  temp.password = await bcrypt.hash(
+    temp.password,
+    Number(config.bcrypt_salt_rounds),
+  )
+  next()
+})
+
+userSchema.post('save', function (doc, next) {
+  doc.password = ''
+  next()
+})
+
+userSchema.pre('find', function (next) {
+  this.find({ isDeleted: { $ne: true } })
+  next()
+})
+userSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } })
+  next()
+})
+
+userSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } })
+  next()
+})
 
 export const UserModel = model<TUser>('User', userSchema)

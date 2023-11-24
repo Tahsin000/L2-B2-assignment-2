@@ -19,8 +19,11 @@ export const userValidationSchema = z.object({
   isActive: z.boolean(),
   hobbies: z.array(z.string()),
   address: addressSchema,
+  isDeleted: z.boolean().default(false),
 })
 export const userUpdateValidationSchema = z.object({
+  userId: z.number(),
+  username: z.string().min(1, 'Username is required'),
   password: z.string().min(6, 'Password must be at least 6 characters long'),
   fullName: fullNameSchema,
   age: z.number().min(0, 'Age must be a positive number'),
@@ -28,5 +31,5 @@ export const userUpdateValidationSchema = z.object({
   isActive: z.boolean(),
   hobbies: z.array(z.string()),
   address: addressSchema,
-  isDeleted: z.boolean().default(false)
+  isDeleted: z.boolean().default(false),
 })
