@@ -12,14 +12,15 @@ const createUser = async (req: Request, res: Response) => {
   try {
     const user = req.body
     const zodParsedData = userValidationSchema.parse(user)
-    const result = await UserServices.createUserIntoDB(zodParsedData)
+    await UserServices.createUserIntoDB(zodParsedData)
 
     // send the res
-
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+    const { password, ...userWithoutPassword } = user;
     res.status(200).json({
       success: true,
       message: 'User created successfully!',
-      data: result,
+      data: userWithoutPassword,
     })
   } catch (err: any) {
     res.status(500).json({
@@ -85,7 +86,6 @@ const updateUser = async (req: Request, res: Response) => {
         message: 'You cannot change the userId or username.',
       })
     }
-    console.log(user)
 
     const zodParsedData = userUpdateValidationSchema.parse(user)
     const result = await UserServices.updateUserIntoDB(userId, zodParsedData)
@@ -133,8 +133,9 @@ const updateOrder = async (req: Request, res: Response) => {
     const userId = Number(req.params.userId)
     const order = req.body
     const zodParsedData = ordersValidationSchema.parse(order)
-    console.log(zodParsedData)
     const result = await UserServices.updateOrderIntoDB(userId, zodParsedData)
+
+
     res.status(200).json({
       success: true,
       message: 'Order created successfully!',

@@ -1,9 +1,9 @@
 import { User } from '../users.model'
 import { TOrders, TUpdateUser, TUser } from './user.interface'
 
-async function checkUserExists(userId:number) {
-  const userExists = await User.isUserExists(userId);
-  return userExists;
+async function checkUserExists(userId: number) {
+  const userExists = await User.isUserExists(userId)
+  return userExists
 }
 const createUserIntoDB = async (user: TUser) => {
   if (await User.isUserExists(user.userId)) {
@@ -13,12 +13,7 @@ const createUserIntoDB = async (user: TUser) => {
   return result
 }
 
-
-
 const getUserIntoDB = async () => {
-  if (!(await checkUserExists(userId))) {
-    throw new Error('User does not exist');
-  }
   const result = await User.aggregate([
     {
       $project: {
@@ -36,22 +31,25 @@ const getUserIntoDB = async () => {
   return result
 }
 const getSingleUserIntoDB = async (userId: number) => {
-  const result = User.findOne({ userId },{
-    userId: 1,
-        username: 1,
-        fullName: 1,
-        age: 1,
-        email: 1,
-        isActive: 1,
-        hobbies: 1,
-        address: 1,
-  } )
-  return result;
+  const result = User.findOne(
+    { userId },
+    {
+      userId: 1,
+      username: 1,
+      fullName: 1,
+      age: 1,
+      email: 1,
+      isActive: 1,
+      hobbies: 1,
+      address: 1,
+    },
+  )
+  return result
 }
 
 const updateUserIntoDB = async (userId: number, user: TUpdateUser) => {
   if (!(await checkUserExists(userId))) {
-    throw new Error('User does not exist');
+    throw new Error('User does not exist')
   }
   // const result = await User.updateOne({ userId }, user)
   const result = await User.aggregate([
@@ -79,7 +77,7 @@ const updateUserIntoDB = async (userId: number, user: TUpdateUser) => {
 
 const deleteUserIntoDB = async (userId: number) => {
   if (!(await checkUserExists(userId))) {
-    throw new Error('User does not exist');
+    throw new Error('User does not exist')
   }
   const result = await User.updateOne({ userId }, { isDeleted: true })
   return result
@@ -87,7 +85,7 @@ const deleteUserIntoDB = async (userId: number) => {
 
 const updateOrderIntoDB = async (userId: number, order: TOrders) => {
   if (!(await checkUserExists(userId))) {
-    throw new Error('User does not exist');
+    throw new Error('User does not exist')
   }
   const result = await User.updateOne({ userId }, { $push: { orders: order } })
   return result
@@ -95,24 +93,15 @@ const updateOrderIntoDB = async (userId: number, order: TOrders) => {
 
 const getAllOrderIntoDB = async (userId: number) => {
   if (!(await checkUserExists(userId))) {
-    throw new Error('User does not exist');
+    throw new Error('User does not exist')
   }
-  const result = await User.aggregate([
-    {
-      $match: { userId },
-    },
-    {
-      $project: {
-        orders: 1,
-      },
-    },
-  ])
+  const result = await User.findOne({ userId }, { orders: 1, _id: 0 })
   return result
 }
 
 const getTotalPriceIntoDB = async (userId: number) => {
   if (!(await checkUserExists(userId))) {
-    throw new Error('User does not exist');
+    throw new Error('User does not exist')
   }
   const result = await User.aggregate([
     {
@@ -131,7 +120,7 @@ const getTotalPriceIntoDB = async (userId: number) => {
       },
     },
   ])
-  return result
+  return result[0]
 }
 
 export const UserServices = {

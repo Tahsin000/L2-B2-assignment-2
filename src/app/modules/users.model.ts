@@ -66,9 +66,9 @@ userSchema.pre('findOne', function (next) {
   next()
 })
 
-userSchema.pre('aggregate', function (next){
-  this.pipeline().unshift({$match:{isDeleted:{$ne:true}}})
-  next();
+userSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({ $match: { isDeleted: { $ne: true } } })
+  next()
 })
 
 userSchema.statics.isUserExists = async function (userId: number) {

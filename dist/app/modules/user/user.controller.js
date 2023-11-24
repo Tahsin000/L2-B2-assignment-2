@@ -28,8 +28,11 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
-            data: err,
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -46,7 +49,11 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -64,7 +71,11 @@ const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -79,7 +90,6 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
                 message: 'You cannot change the userId or username.',
             });
         }
-        console.log(user);
         const zodParsedData = user_validation_zod_1.userUpdateValidationSchema.parse(user);
         const result = yield user_service_1.UserServices.updateUserIntoDB(userId, zodParsedData);
         res.status(200).json({
@@ -91,7 +101,11 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -109,7 +123,11 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -119,7 +137,6 @@ const updateOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const userId = Number(req.params.userId);
         const order = req.body;
         const zodParsedData = user_validation_zod_1.ordersValidationSchema.parse(order);
-        console.log(zodParsedData);
         const result = yield user_service_1.UserServices.updateOrderIntoDB(userId, zodParsedData);
         res.status(200).json({
             success: true,
@@ -130,7 +147,11 @@ const updateOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -147,7 +168,11 @@ const getAllOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
@@ -164,7 +189,11 @@ const getTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err.message || 'something went wrong',
+            message: 'something went wrong',
+            error: {
+                code: req.app.settings.port,
+                description: err.message,
+            },
         });
     }
 });
