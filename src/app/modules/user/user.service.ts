@@ -81,9 +81,34 @@ const deleteUserIntoDB = async (userId: number) => {
 
 const updateOrderIntoDB = async (userId: number, order: TOrders) => {
   const result = await User.updateOne({ userId }, { $push: { orders: order } })
+  return result
+}
 
-  console.log(order)
-  // console.log({order})
+const getAllOrderIntoDB = async (userId: number) => {
+  const result = await User.aggregate([
+    {
+      $match: { userId },
+    },
+    {
+      $project: {
+        orders: 1,
+      },
+    },
+  ])
+  return result
+}
+
+const getTotalPriceIntoDB = async (userId: number) => {
+  const result = await User.aggregate([
+    {
+      $match: { userId },
+    },
+    {
+      $project: {
+        orders: 1,
+      },
+    },
+  ])
   return result
 }
 
@@ -94,4 +119,6 @@ export const UserServices = {
   updateUserIntoDB,
   deleteUserIntoDB,
   updateOrderIntoDB,
+  getAllOrderIntoDB,
+  getTotalPriceIntoDB
 }

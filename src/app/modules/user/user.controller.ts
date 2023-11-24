@@ -41,7 +41,7 @@ const getUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err,
+      message: err.message || 'something went wrong',
     })
   }
 }
@@ -58,7 +58,7 @@ const getSingleUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err,
+      message: err.message || 'something went wrong',
     })
   }
 }
@@ -86,7 +86,7 @@ const updateUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err,
+      message: err.message || 'something went wrong',
     })
   }
 }
@@ -104,7 +104,7 @@ const deleteUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err,
+      message: err.message || 'something went wrong',
     })
   }
 }
@@ -124,7 +124,40 @@ const updateOrder = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err,
+      message: err.message || 'something went wrong',
+    })
+  }
+}
+const getAllOrder = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params.userId)
+    const result = await UserServices.getAllOrderIntoDB(userId)
+    res.status(200).json({
+      success: true,
+      message: 'Order fetched successfully!',
+      data: result,
+    })
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'something went wrong',
+    })
+  }
+}
+
+const getTotalPrice = async (req: Request, res: Response) => {
+  try {
+    const userId = Number(req.params.userId)
+    const result = await UserServices.getTotalPriceIntoDB(userId)
+    res.status(200).json({
+      success: true,
+      message: 'Total price fetched successfully!',
+      data: result,
+    })
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: err.message || 'something went wrong',
     })
   }
 }
@@ -136,4 +169,6 @@ export const UserControllers = {
   updateUser,
   deleteUser,
   updateOrder,
+  getAllOrder,
+  getTotalPrice
 }
