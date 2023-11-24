@@ -25,6 +25,10 @@ export const userSchema = new Schema<TUser>({
   isActive: { type: Boolean, default: true },
   hobbies: [{ type: String }],
   address: addressSchema,
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  }
 })
 userSchema.pre('save', async function (next) {
     // console.log(this, 'pre, hook: we will save the data ')

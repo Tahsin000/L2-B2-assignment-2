@@ -19,4 +19,5 @@ export type TUser =
     isActive: boolean
     hobbies: THobbies
     address : TAddress
+    isDeleted: boolean
 }
