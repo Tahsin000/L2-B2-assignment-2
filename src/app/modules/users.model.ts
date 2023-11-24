@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
 import { Schema, model } from 'mongoose'
-import { TAddress, TFullName, TUser } from './user/user.interface'
+import { TAddress, TFullName, TUser, UserModel } from './user/user.interface'
 import config from '../config'
 import bcrypt from 'bcrypt'
 
@@ -64,4 +64,9 @@ userSchema.pre('aggregate', function (next) {
   next()
 })
 
-export const UserModel = model<TUser>('User', userSchema)
+userSchema.statics.isUserExists = async function (userId: number){
+  const existingUser = await User.findOne({userId});
+  return existingUser
+}
+
+export const User = model<TUser, UserModel>('User', userSchema)

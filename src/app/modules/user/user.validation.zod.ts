@@ -22,8 +22,8 @@ export const userValidationSchema = z.object({
   isDeleted: z.boolean().default(false),
 })
 export const userUpdateValidationSchema = z.object({
-  userId: z.number(),
-  username: z.string().min(1, 'Username is required'),
+  userId: z.number().optional(),
+  username: z.string().min(1, 'Username is required').optional(),
   password: z.string().min(6, 'Password must be at least 6 characters long'),
   fullName: fullNameSchema,
   age: z.number().min(0, 'Age must be a positive number'),
