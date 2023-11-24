@@ -85,10 +85,50 @@ const deleteUserIntoDB = (userId) => __awaiter(void 0, void 0, void 0, function*
     const result = yield users_model_1.User.updateOne({ userId }, { isDeleted: true });
     return result;
 });
+const updateOrderIntoDB = (userId, order) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield users_model_1.User.updateOne({ userId }, { $push: { orders: order } });
+    return result;
+});
+const getAllOrderIntoDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield users_model_1.User.aggregate([
+        {
+            $match: { userId },
+        },
+        {
+            $project: {
+                orders: 1,
+            },
+        },
+    ]);
+    return result;
+});
+const getTotalPriceIntoDB = (userId) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield users_model_1.User.aggregate([
+        {
+            $match: { userId },
+        },
+        {
+            $unwind: '$orders',
+        },
+        {
+            $group: { _id: null, totalPrice: { $sum: '$orders.price' } },
+        },
+        {
+            $project: {
+                _id: 0,
+                totalPrice: 1,
+            },
+        },
+    ]);
+    return result;
+});
 exports.UserServices = {
     createUserIntoDB,
     getUserIntoDB,
     getSingleUserIntoDB,
     updateUserIntoDB,
     deleteUserIntoDB,
+    updateOrderIntoDB,
+    getAllOrderIntoDB,
+    getTotalPriceIntoDB,
 };

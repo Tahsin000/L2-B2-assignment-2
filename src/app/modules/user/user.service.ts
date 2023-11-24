@@ -104,8 +104,15 @@ const getTotalPriceIntoDB = async (userId: number) => {
       $match: { userId },
     },
     {
+      $unwind: '$orders',
+    },
+    {
+      $group: { _id: null, totalPrice: { $sum: '$orders.price' } },
+    },
+    {
       $project: {
-        orders: 1,
+        _id: 0,
+        totalPrice: 1,
       },
     },
   ])
@@ -120,5 +127,5 @@ export const UserServices = {
   deleteUserIntoDB,
   updateOrderIntoDB,
   getAllOrderIntoDB,
-  getTotalPriceIntoDB
+  getTotalPriceIntoDB,
 }

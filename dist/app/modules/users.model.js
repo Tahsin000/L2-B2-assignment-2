@@ -44,6 +44,13 @@ exports.userSchema = new mongoose_1.Schema({
         type: Boolean,
         default: false,
     },
+    orders: [
+        {
+            productName: { type: String },
+            price: { type: Number },
+            quantity: { type: Number },
+        },
+    ],
 });
 exports.userSchema.pre('save', function (next) {
     return __awaiter(this, void 0, void 0, function* () {

@@ -46,7 +46,7 @@ const getUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err,
+            message: err.message || 'something went wrong',
         });
     }
 });
@@ -64,7 +64,7 @@ const getSingleUser = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err,
+            message: err.message || 'something went wrong',
         });
     }
 });
@@ -91,7 +91,7 @@ const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err,
+            message: err.message || 'something went wrong',
         });
     }
 });
@@ -109,7 +109,62 @@ const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     catch (err) {
         res.status(500).json({
             success: false,
-            message: err,
+            message: err.message || 'something went wrong',
+        });
+    }
+});
+const updateOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    // will call service function
+    try {
+        const userId = Number(req.params.userId);
+        const order = req.body;
+        const zodParsedData = user_validation_zod_1.ordersValidationSchema.parse(order);
+        console.log(zodParsedData);
+        const result = yield user_service_1.UserServices.updateOrderIntoDB(userId, zodParsedData);
+        res.status(200).json({
+            success: true,
+            message: 'Order created successfully!',
+            data: result,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message || 'something went wrong',
+        });
+    }
+});
+const getAllOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = Number(req.params.userId);
+        const result = yield user_service_1.UserServices.getAllOrderIntoDB(userId);
+        res.status(200).json({
+            success: true,
+            message: 'Order fetched successfully!',
+            data: result,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message || 'something went wrong',
+        });
+    }
+});
+const getTotalPrice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const userId = Number(req.params.userId);
+        const result = yield user_service_1.UserServices.getTotalPriceIntoDB(userId);
+        res.status(200).json({
+            success: true,
+            message: 'Total price fetched successfully!',
+            data: result,
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message || 'something went wrong',
         });
     }
 });
@@ -119,4 +174,7 @@ exports.UserControllers = {
     getSingleUser,
     updateUser,
     deleteUser,
+    updateOrder,
+    getAllOrder,
+    getTotalPrice,
 };

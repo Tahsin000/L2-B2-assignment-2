@@ -11,10 +11,10 @@ export type TFullName = {
   lastName: string
 }
 export type TOrders = {
-    productName: string
-    price: number
-    quantity: number
-  }
+  productName: string
+  price: number
+  quantity: number
+}
 export type TUser = {
   userId: number
   username: string

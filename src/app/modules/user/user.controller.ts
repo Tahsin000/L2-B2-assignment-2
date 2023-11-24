@@ -170,5 +170,5 @@ export const UserControllers = {
   deleteUser,
   updateOrder,
   getAllOrder,
-  getTotalPrice
+  getTotalPrice,
 }

@@ -38,8 +38,8 @@ export const userSchema = new Schema<TUser>({
       productName: { type: String },
       price: { type: Number },
       quantity: { type: Number },
-    }
-  ]
+    },
+  ],
 })
 userSchema.pre('save', async function (next) {
   // console.log(this, 'pre, hook: we will save the data ')
