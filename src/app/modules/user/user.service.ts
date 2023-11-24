@@ -93,6 +93,22 @@ const updateOrderIntoDB = async (userId: number, order: TOrders) => {
   return result
 }
 
+const getAllOrderIntoDB = async (userId: number) => {
+  if (!(await checkUserExists(userId))) {
+    throw new Error('User does not exist');
+  }
+  const result = await User.aggregate([
+    {
+      $match: { userId },
+    },
+    {
+      $project: {
+        orders: 1,
+      },
+    },
+  ])
+  return result
+}
 
 const getTotalPriceIntoDB = async (userId: number) => {
   if (!(await checkUserExists(userId))) {
