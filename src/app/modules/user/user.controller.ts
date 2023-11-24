@@ -24,8 +24,11 @@ const createUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
-      data: err,
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -41,7 +44,11 @@ const getUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -58,7 +65,11 @@ const getSingleUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -86,7 +97,11 @@ const updateUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -104,7 +119,11 @@ const deleteUser = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -124,7 +143,11 @@ const updateOrder = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -140,7 +163,11 @@ const getAllOrder = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
@@ -157,7 +184,11 @@ const getTotalPrice = async (req: Request, res: Response) => {
   } catch (err: any) {
     res.status(500).json({
       success: false,
-      message: err.message || 'something went wrong',
+      message: 'something went wrong',
+      error: {
+        code: req.app.settings.port,
+        description: err.message,
+      },
     })
   }
 }
