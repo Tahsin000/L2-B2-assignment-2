@@ -8,6 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserControllers = void 0;
 const user_service_1 = require("./user.service");
@@ -17,12 +28,14 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const user = req.body;
         const zodParsedData = user_validation_zod_1.userValidationSchema.parse(user);
-        const result = yield user_service_1.UserServices.createUserIntoDB(zodParsedData);
+        yield user_service_1.UserServices.createUserIntoDB(zodParsedData);
         // send the res
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-unused-vars
+        const { password } = user, userWithoutPassword = __rest(user, ["password"]);
         res.status(200).json({
             success: true,
             message: 'User created successfully!',
-            data: result,
+            data: userWithoutPassword,
         });
     }
     catch (err) {

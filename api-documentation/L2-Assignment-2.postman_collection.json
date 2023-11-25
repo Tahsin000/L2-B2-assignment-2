@@ -1,0 +1,249 @@
+{
+	"info": {
+		"_postman_id": "6a9da475-f9b5-4a8b-b496-5ecb31cb7c01",
+		"name": "L2-Assignment-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30679746"
+	},
+	"item": [
+		{
+			"name": "start",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_api}}",
+					"host": [
+						"{{local_api}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 51,\r\n    \"username\": \"eaes211r89\",\r\n    \"password\": \"examplePassword\",\r\n    \"fullName\": {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\"\r\n    },\r\n    \"age\": 30,\r\n    \"email\": \"jo1o@example.com\",\r\n    \"isActive\": true,\r\n    \"hobbies\": [\r\n        \"reading\",\r\n        \"coding\",\r\n        \"hiking\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"123 Main St\",\r\n        \"city\": \"Anytown\",\r\n        \"country\": \"Countryland\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_api}}/api/users",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-list",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": 12345,\r\n    \"username\": \"exampleUser\",\r\n    \"password\": \"examplePassword\",\r\n    \"fullName\": {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\"\r\n    },\r\n    \"age\": 30,\r\n    \"email\": \"johndoe@example.com\",\r\n    \"isActive\": true,\r\n    \"hobbies\": [\r\n        \"reading\",\r\n        \"coding\",\r\n        \"hiking\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"123 Main St\",\r\n        \"city\": \"Anytown\",\r\n        \"country\": \"Countryland\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_api}}/api/users",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "single-user",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_api}}/api/users/51",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update-user",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"test12\",\r\n    \"fullName\": {\r\n        \"firstName\": \"John\",\r\n        \"lastName\": \"Doe\"\r\n    },\r\n    \"age\": 30,\r\n    \"email\": \"HHJN@example.com\",\r\n    \"isActive\": true,\r\n    \"hobbies\": [\r\n        \"reading\",\r\n        \"coding\",\r\n        \"hiking\"\r\n    ],\r\n    \"address\": {\r\n        \"street\": \"123 Main St\",\r\n        \"city\": \"Anytown\",\r\n        \"country\": \"Countryland\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_api}}/api/users/51",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{local_api}}/api/users/51",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"51"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert-user-order",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"productName\": \"Example Product\",\r\n  \"price\": 29.99,\r\n  \"quantity\": 5\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local_api}}/api/users/511/orders",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"511",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "single-user-of-orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_api}}/api/users/511/orders",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"511",
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "single-user-price",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{local_api}}/api/users/511/orders/total-price",
+					"host": [
+						"{{local_api}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"511",
+						"orders",
+						"total-price"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "local_api",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "production_api",
+			"value": "https://l2-b2-assignment-2-xi.vercel.app",
+			"type": "string"
+		}
+	]
+}
